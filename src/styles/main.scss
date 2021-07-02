@@ -14,8 +14,7 @@ $day: 4;
 
 @mixin square($size) {
     width: $size;
-    height: $size;
-    
+    height: $size; 
 }
 
 .calendar {
@@ -62,8 +61,6 @@ $day: 4;
   }
 }
 
-
-
 $start-day:
   'mon' 0,
   'tue' 1,
@@ -77,5 +74,4 @@ $start-day:
   .calendar__cell--start-day--#{$name} {
     margin-left: $cell-size*$number+$number*1px;
   }
-  
 }
