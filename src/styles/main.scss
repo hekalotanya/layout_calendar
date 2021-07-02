@@ -39,7 +39,7 @@ $col-count: 7;
     color: black;
     background-color: #eee;
     transition-duration: 0.5s;
-    transition: transform;
+    transition-property: transform;
     }
 
     &__cell:hover {
