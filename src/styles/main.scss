@@ -44,7 +44,15 @@ $row-count: 5;
     &__cell:hover {
       background-color: pink;
       cursor: pointer;
-      }  
+      }
+
+      @for $index from 28 through 30 {
+        @for $childIndex from $index + 1 through 31 {
+          &--#{$index} &__cell:nth-child(#{$childIndex}) {
+            display: none;
+          }
+        }
+      }
     }
 
 
@@ -57,12 +65,7 @@ $start-day:
   'sat' 5,
   'sun' 6;
 
-$month-length:
-  28,
-  29,
-  30,
-  31;
- 
+
 @each $name, $number in $start-day{
   .calendar--#{$name}  {
     .calendar__cell:first-child {
@@ -71,19 +74,9 @@ $month-length:
   }
 }
 
-@each $length in $month-length {
-  .calendar--#{$length}  {
-    @for $index from $length+1 through 31 {
-      .calendar__cell:nth-child(#{$index}) {
-        display: none;
-      }
-    } 
-   
-    @for $index from 1 through $length {
-      .calendar__cell:nth-child(#{$index}):before {
-        content: "#{$index}";
-      } 
-    }
-  }
+@for $index from 1 through 31 {
+  .calendar__cell:nth-child(#{$index}):before {
+    content: "#{$index}";
+  } 
 }
 
