@@ -5,8 +5,7 @@ body {
 $cell-size: 100px;
 $col-count: 7;
 $row-count: 4;
-$month-length: 28;
-$day: 4;
+
 
 @function getShift($base, $size, $index) {
     @return $base + ($index - 1) * $size;
@@ -27,8 +26,7 @@ $day: 4;
     &__field {
         display: flex;
         flex-wrap: wrap;
-        gap: 1px;
-        
+        gap: 1px;   
     }
 
     &__cell {
@@ -37,29 +35,16 @@ $day: 4;
         display: none;
       }
 
+      &__cell {
+        background-color: #eee;
+      }
+
       &__cell:hover {
         background-color: pink;
+        cursor: pointer;
       }  
     }
 
-@for $index from 1 through $month-length {
-  .calendar__cell--count--#{$index}::before {
-    content: "#{$index}";
-  }
-}
-
-@for $index from 1 through $month-length {
-  .calendar__cell--count--#{$index} {
-    border: 1px solid black;
-    text-align: center;
-    line-height: $cell-size;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    color: black;
-    background-color: #eee;
-    display: inline;
-  }
-}
 
 $start-day:
   'mon' 0,
@@ -69,9 +54,36 @@ $start-day:
   'fri' 4,
   'sat' 5,
   'sun' 6;
-  
+
+$month-length:
+  28,
+  29,
+  30,
+  31;
+ 
 @each $name, $number in $start-day{
-  .calendar__cell--start-day--#{$name} {
-    margin-left: $cell-size*$number+$number*1px;
+  .calendar--#{$name}  {
+    .calendar__cell:first-child {
+      margin-left: $cell-size*$number+$number*1px;
+    }    
+  }
+}
+
+@each $length in $month-length {
+  .calendar--#{$length}  {
+    .calendar__cell:nth-child(-n+#{$length}) {
+    border: 1px solid black;
+    text-align: center;
+    line-height: $cell-size;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: black;
+    display: inline;
+    }
+    @for $index from 1 through $length {
+      .calendar__cell:nth-child(#{$index}):before {
+        content: "#{$index}";
+      } 
+    }
   }
 }
