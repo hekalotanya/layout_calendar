@@ -22,6 +22,7 @@ $col-count: 7;
   border: 2px solid transparent;
 
   &__field {
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     gap: 1px;   
@@ -37,11 +38,15 @@ $col-count: 7;
     font-size: 30px;
     color: black;
     background-color: #eee;
+    transition-duration: 0.5s;
+    transition: transform;
     }
 
     &__cell:hover {
+      position: relative;
       background-color: pink;
       cursor: pointer;
+      transform: translateY(-20px);
     }
 
     @for $index from 28 through 30 {
