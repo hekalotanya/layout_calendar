@@ -4,7 +4,7 @@ body {
 
 $cell-size: 100px;
 $col-count: 7;
-$row-count: 4;
+$row-count: 5;
 
 
 @function getShift($base, $size, $index) {
