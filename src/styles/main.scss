@@ -1,3 +1,85 @@
 body {
   margin: 0;
 }
+
+$cell-size: 100px;
+$col-count: 7;
+
+@function getShift($base, $size, $index) {
+  @return $base + ($index - 1) * $size;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size; 
+}
+
+.calendar {
+  display: flex;
+  margin: auto;
+  position: relative;
+  width: $col-count * $cell-size + 6px;
+  border: 2px solid transparent;
+
+  &__field {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;   
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    @include square($cell-size);
+    border: 1px solid black;
+    text-align: center;
+    line-height: $cell-size;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: black;
+    background-color: #eee;
+    transition-duration: 0.5s;
+    transition-property: transform;
+    }
+
+    &__cell:hover {
+      position: relative;
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 28 through 30 {
+      @for $childIndex from $index + 1 through 31 {
+        &--#{$index} &__cell:nth-child(#{$childIndex}) {
+          display: none;
+          }
+        }
+      }
+    }
+
+
+$start-day:
+  'mon' 0,
+  'tue' 1,
+  'wed' 2,
+  'thu' 3,
+  'fri' 4,
+  'sat' 5,
+  'sun' 6;
+
+
+@each $name, $number in $start-day{
+  .calendar--#{$name}  {
+    .calendar__cell:first-child {
+      margin-left: $cell-size*$number+$number*1px;
+    }    
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__cell:nth-child(#{$index}):before {
+    content: "#{$index}";
+  } 
+}
+
