@@ -4,52 +4,50 @@ body {
 
 $cell-size: 100px;
 $col-count: 7;
-$row-count: 5;
-
 
 @function getShift($base, $size, $index) {
-    @return $base + ($index - 1) * $size;
+  @return $base + ($index - 1) * $size;
 }
 
 @mixin square($size) {
-    width: $size;
-    height: $size; 
+  width: $size;
+  height: $size; 
 }
 
 .calendar {
+  display: flex;
+  margin: auto;
+  position: relative;
+  width: $col-count * $cell-size + 6px;
+  border: 2px solid transparent;
+
+  &__field {
     display: flex;
-    margin: auto;
-    position: relative;
-    width: $col-count * $cell-size + 6px;
-    border: 2px solid transparent;
+    flex-wrap: wrap;
+    gap: 1px;   
+  }
 
-    &__field {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1px;   
+  &__cell {
+    box-sizing: border-box;
+    @include square($cell-size);
+    border: 1px solid black;
+    text-align: center;
+    line-height: $cell-size;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: black;
+    background-color: #eee;
     }
-
-    &__cell {
-      box-sizing: border-box;
-      @include square($cell-size);
-      border: 1px solid black;
-      text-align: center;
-      line-height: $cell-size;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: black;
-      background-color: #eee;
-      }
 
     &__cell:hover {
       background-color: pink;
       cursor: pointer;
-      }
+    }
 
-      @for $index from 28 through 30 {
-        @for $childIndex from $index + 1 through 31 {
-          &--#{$index} &__cell:nth-child(#{$childIndex}) {
-            display: none;
+    @for $index from 28 through 30 {
+      @for $childIndex from $index + 1 through 31 {
+        &--#{$index} &__cell:nth-child(#{$childIndex}) {
+          display: none;
           }
         }
       }
